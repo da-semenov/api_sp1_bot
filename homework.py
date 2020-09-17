@@ -24,16 +24,22 @@ logging.basicConfig(
 
 def parse_homework_status(homework):
     homework_name = homework["homework_name"]
-    if homework["status"] != "approved":
-        verdict = "К сожалению в работе нашлись ошибки."
-    else:
+    if homework["status"] == "approved":
         verdict = (
             "Ревьюеру всё понравилось, можно приступать к следующему уроку."
         )
+    elif homework["status"] == "rejected":
+        verdict = "К сожалению в работе нашлись ошибки."
+    else:
+        logging.error("Похоже изменился формат статусов.")
+        return "Ошибка статуса."
     return f'У вас проверили работу "{homework_name}"!\n\n{verdict}'
 
 
 def get_homework_statuses(current_timestamp):
+    if current_timestamp is None:
+        logging.error("Ошибка:Что-то с форматом данных")
+        raise Exception("Ошибка формата данных")
     headers = {"Authorization": f"OAuth {PRACTICUM_TOKEN}"}
     data = {
         "from_date": current_timestamp
@@ -42,8 +48,6 @@ def get_homework_statuses(current_timestamp):
         homework_statuses = requests.get(url=url, params=data, headers=headers)
     except requests.exceptions.RequestException as e:
         logging.error(f"Ошибка запроса к серверу: {e}")
-        print(f"Ошибка запроса к серверу: {e}")
-        raise
     return homework_statuses.json()
 
 
@@ -68,7 +72,6 @@ def main():
 
         except Exception as e:
             logging.error(f"Бот упал с ошибкой: {e}")
-            print(f"Бот упал с ошибкой: {e}")
             time.sleep(60 * 20)
             continue
 
