@@ -14,12 +14,10 @@
 - ``pip install -r requirements.txt``
 5. Заполнить токены и chat_id (_PRACTICUM_TOKEN_, _TELEGRAM_TOKEN_, _TELEGRAM_CHAT_ID_)
 - `` .env``
-6. Запустите локальный сервер.
-- ``python3 manage.py runserver``
+6. Запустите код
  
 ## Основные использованные технологии
 * [python 3.8](https://www.python.org/)
-* [django](https://www.djangoproject.com/)
 
 ## Автор
 * **Семенов Денис** - [da-semenov](https://github.com/da-semenov)
