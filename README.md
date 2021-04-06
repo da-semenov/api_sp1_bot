@@ -1,3 +1,4 @@
+[![Python](https://img.shields.io/badge/-Python-464646??style=flat-square&logo=Python)](https://www.python.org/)
 # Телеграм-бот
 Телеграм-бот, который обрщается к API сервиса Практикум.Домашка. 
 Узнаёт, взята ли ваша домашка в ревью, проверена, есть ли ошибки или принята. 
